@@ -13,3 +13,8 @@ body {
 .scrollbar-hidden::-ms-scrollbar {
   display: none;
 }
+
+.css-exkjcx,
+.css-187mznn-MuiSlider-root {
+  color: #e3256c !important;
+}
