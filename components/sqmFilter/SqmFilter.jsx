@@ -1,6 +1,6 @@
-import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import useSearchQuery from "../../hooks/useSearchQuery";
 
 const sqmOptions = [
   "55 - 75",
@@ -16,10 +16,7 @@ const SqmFilter = () => {
   const [active, setActive] = useState();
 
   const router = useRouter();
-
-  const searchParams = useSearchParams();
-
-  const sqm = searchParams.get("sqm") || "";
+  const { sqm } = useSearchQuery();
 
   const handleClick = (index, item) => {
     if (index !== active) {

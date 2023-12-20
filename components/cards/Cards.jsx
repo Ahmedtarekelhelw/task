@@ -1,27 +1,21 @@
 import Card from "../card/Card";
-import { useData } from "../../context/DataContext";
 import { useEffect, useMemo } from "react";
 import Pagination from "../Pagination";
-import { useSearchParams } from "next/navigation";
 import LoadingSpinner from "../LoadingSpinner";
+import useSearchQuery from "../../hooks/useSearchQuery";
+import useFetch from "../../hooks/useFetch";
 
 const Cards = () => {
-  const { data, fetchData, loading } = useData();
-  const searchParams = useSearchParams();
-
-  // pagination
+  const { data, loading, fetchData } = useFetch();
   const dataperpage = 3;
-  const currentPage = searchParams.get("page") || 1;
 
   // url search params
-  const sqm = searchParams.get("sqm") || "";
-  const home_type = searchParams.get("home_type");
-  const bedrooms_no = searchParams.get("bedrooms_no");
-  const furnished = searchParams.get("furnished");
+  const { sqm, bedrooms_no, home_type, furnished, currentPage } =
+    useSearchQuery();
 
   const FiltredData = useMemo(
     () =>
-      data.filter((obj) => {
+      data?.filter((obj) => {
         const sqmFilter = sqm
           ? obj.area >= sqm.split(",")[0] && obj.area <= sqm.split(",")[1]
           : true;
@@ -43,7 +37,7 @@ const Cards = () => {
           sqmFilter && homeTypeFilter && bedroomsNoFilter && furnishedFilter
         );
       }),
-    [bedrooms_no, data.length, furnished, home_type, sqm] // eslint-disable-line
+    [bedrooms_no, data?.length, furnished, home_type, sqm] // eslint-disable-line
   );
 
   let currentData = useMemo(
@@ -51,7 +45,7 @@ const Cards = () => {
       if (sqm || home_type || bedrooms_no || furnished) return FiltredData;
       let lastIndexofData = currentPage * dataperpage;
       let firstIndexofData = lastIndexofData - dataperpage;
-      return data.slice(firstIndexofData, lastIndexofData);
+      return data?.slice(firstIndexofData, lastIndexofData);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [
@@ -81,7 +75,7 @@ const Cards = () => {
             ))}
           </div>
           {!sqm && !home_type && !furnished && !bedrooms_no && (
-            <Pagination currentPage={+currentPage} dataperpage={dataperpage} />
+            <Pagination dataperpage={dataperpage} />
           )}
         </>
       )}

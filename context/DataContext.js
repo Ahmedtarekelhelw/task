@@ -1,25 +1,11 @@
 import axios from "axios";
-import { useSearchParams } from "next/navigation";
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const Context = createContext();
 
 export const DataContextProvider = ({ children }) => {
-  const searchParams = useSearchParams();
-  const sqm = searchParams.get("sqm");
-  const home_type = searchParams.get("home_type");
-  const bedrooms_no = searchParams.get("bedrooms_no");
-  const furnished = searchParams.get("furnished");
-
   const [data, setData] = useState([]);
-  const [next, setNext] = useState("");
-  const [prev, setPrev] = useState("");
+
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");

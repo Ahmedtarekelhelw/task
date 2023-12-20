@@ -1,12 +1,14 @@
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaAngleRight } from "react-icons/fa6";
-import { useData } from "../context/DataContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import useSearchQuery from "../hooks/useSearchQuery";
 
-const Pagination = ({ currentPage, dataperpage }) => {
+const Pagination = ({ dataperpage }) => {
   const router = useRouter();
-  const { count: total } = useData();
+  const { currentPage } = useSearchQuery();
+
+  const total = 10;
 
   let paginationNumber = total / dataperpage;
 
