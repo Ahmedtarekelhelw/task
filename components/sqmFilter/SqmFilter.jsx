@@ -28,22 +28,24 @@ const SqmFilter = () => {
     }
   };
   return (
-    <div className=" flex gap-2 flex-wrap mb-5 justify-between sm:justify-normal">
-      {sqmOptions.map((item, i) => {
-        const formatSqm = item.split(" - ").join(",");
-        const isActive = sqm === formatSqm;
-        return (
-          <button
-            className={`py-2 px-4 w-[130px] text-sm sm:text-md cursor-pointer ${
-              isActive ? "bg-[#0C1F39] text-white" : "bg-gray-200"
-            } rounded-lg transition-all`}
-            key={i}
-            onClick={() => handleClick(i, formatSqm)}
-          >
-            {item} SQM
-          </button>
-        );
-      })}
+    <div className="flex gap-2 overflow-x-auto  mb-5 justify-between sm:justify-normal scrollbar-hidden ">
+      <div className="flex gap-3 ">
+        {sqmOptions.map((item, i) => {
+          const formatSqm = item.split(" - ").join(",");
+          const isActive = sqm === formatSqm;
+          return (
+            <button
+              className={`py-2 px-4 w-[130px] outline-none  md:w-auto text-sm sm:text-md cursor-pointer ${
+                isActive ? "bg-[#0C1F39] text-white" : "bg-gray-200"
+              } rounded-xl transition-all`}
+              key={i}
+              onClick={() => handleClick(i, formatSqm)}
+            >
+              {item} SQM
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 };

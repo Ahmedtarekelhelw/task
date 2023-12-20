@@ -1,5 +1,5 @@
 import Card from "../card/Card";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import Pagination from "../Pagination";
 import LoadingSpinner from "../LoadingSpinner";
 import useSearchQuery from "../../hooks/useSearchQuery";

@@ -2,11 +2,13 @@ import { useRouter } from "next/router";
 import CheckBoxFilter from "../CheckBoxFilter";
 import RangeFilter from "../RangeFilter";
 import { useData } from "../../context/DataContext";
+import useFilterOptions from "../../hooks/useFilterOptions";
 
 const Filteration = () => {
   const router = useRouter();
-
   const { maxPrice, maxArea } = useData();
+
+  const { homeTypeFilter, bedRoomFilter, furnishedFilter } = useFilterOptions();
 
   return (
     <div className="border-[1px] w-full border-[#A4ABB6] rounded-md p-3 sticky top-4">
@@ -21,23 +23,14 @@ const Filteration = () => {
         </button>
       </div>
 
-      <CheckBoxFilter
-        header="Type of home"
-        checkboxes={["appartment", "twinhouse", "duplex", "villa"]}
-      />
+      <CheckBoxFilter header="Type of home" checkboxes={homeTypeFilter} />
       <RangeFilter header="Price range" minVal={20} maxVal={maxPrice} />
 
-      <CheckBoxFilter
-        header="Number of bedrooms"
-        checkboxes={["studio", "02", "03", "+4"]}
-      />
+      <CheckBoxFilter header="Number of bedrooms" checkboxes={bedRoomFilter} />
 
       <RangeFilter header="Area (sqm)" minVal={20} maxVal={maxArea} />
 
-      <CheckBoxFilter
-        header="Furnishings"
-        checkboxes={["Any", "furnished", "Unfurnished"]}
-      />
+      <CheckBoxFilter header="Furnishings" checkboxes={furnishedFilter} />
     </div>
   );
 };

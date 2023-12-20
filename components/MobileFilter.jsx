@@ -3,10 +3,14 @@ import { GoChevronLeft } from "react-icons/go";
 import CheckBoxFilter from "./CheckBoxFilter";
 import RangeFilter from "./RangeFilter";
 import { useData } from "../context/DataContext";
+import { useMemo } from "react";
+import useFilterOptions from "../hooks/useFilterOptions";
 
 const MobileFilter = ({ setOpenFilter, openFilter }) => {
   const router = useRouter();
   const { maxPrice, maxArea } = useData();
+
+  const { homeTypeFilter, bedRoomFilter, furnishedFilter } = useFilterOptions();
 
   return (
     <>
@@ -30,21 +34,15 @@ const MobileFilter = ({ setOpenFilter, openFilter }) => {
       </div>
       {/* content */}
       <div className="px-5">
-        <CheckBoxFilter
-          header="Type of home"
-          checkboxes={["appartment", "twinhouse", "duplex", "villa"]}
-        />
+        <CheckBoxFilter header="Type of home" checkboxes={homeTypeFilter} />
         <RangeFilter header="Price range" minVal={20} maxVal={maxPrice} />
         <CheckBoxFilter
           header="Number of bedrooms"
-          checkboxes={["studio", "02", "03", "+4"]}
+          checkboxes={bedRoomFilter}
         />
         <RangeFilter header="Area (sqm)" minVal={20} maxVal={maxArea} />
 
-        <CheckBoxFilter
-          header="Furnishings"
-          checkboxes={["Any", "furnished", "Unfurnished"]}
-        />
+        <CheckBoxFilter header="Furnishings" checkboxes={furnishedFilter} />
       </div>
     </>
   );

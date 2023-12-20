@@ -12,7 +12,7 @@ export default function Home() {
   const [openFilter, setOpenFilter] = useState(false);
 
   return (
-    <div className="py-6 px-10 ">
+    <div className="py-6 px-8 md:px-10 ">
       <h1 className="text-2xl semi-bold mb-3">Explore properties</h1>
       {/* Filter Icon */}
       <div
@@ -34,16 +34,23 @@ export default function Home() {
       </div>
 
       {/*  main content */}
+
+      <div className="block md:hidden">
+        <SqmFilter />
+      </div>
+
       <div
         className={`${
           openFilter ? "hidden md:flex" : "flex"
-        } gap-8 justify-center`}
+        } gap-8 justify-center `}
       >
         <div className="flex-1 hidden md:flex">
           <Filteration />
         </div>
-        <div className="flex-[3.5]">
-          <SqmFilter />
+        <div className="flex-[3.5] ">
+          <div className="hidden md:block">
+            <SqmFilter />
+          </div>
           <Cards />
         </div>
       </div>
