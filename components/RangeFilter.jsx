@@ -36,7 +36,7 @@ const RangeFilter = ({ header, minVal, maxVal }) => {
           max={maxVal}
           onChange={handleChange}
           valueLabelDisplay="auto"
-          className="text-[#E3256C] "
+          style={{ color: "#E3256C !important" }}
         />
       </div>
     </div>
