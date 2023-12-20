@@ -8,8 +8,9 @@ const useSearchQuery = () => {
   const bedrooms_no = searchParams.get("bedrooms_no");
   const furnished = searchParams.get("furnished");
   const currentPage = +searchParams.get("page") || 1;
+  const price = searchParams.get("price") || "";
 
-  return { sqm, home_type, bedrooms_no, furnished, currentPage };
+  return { sqm, home_type, bedrooms_no, furnished, currentPage, price };
 };
 
 export default useSearchQuery;

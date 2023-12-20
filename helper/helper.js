@@ -3,6 +3,10 @@ export const headers = {
   "Number of bedrooms": "bedrooms_no",
   Furnishings: "furnished",
 };
+export const rangeHeaders = {
+  "Price range": "price",
+  "Area (sqm)": "sqm",
+};
 
 export const CheckboxId = (value) => {
   switch (value) {
@@ -17,4 +21,9 @@ export const CheckboxId = (value) => {
     default:
       return value;
   }
+};
+
+export const getMaxValue = (data, value) => {
+  const maxValue = Math.max(...data.map((product) => product[value]));
+  return maxValue;
 };

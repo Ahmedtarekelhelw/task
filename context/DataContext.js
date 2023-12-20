@@ -1,14 +1,15 @@
 import axios from "axios";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import { getMaxValue } from "../helper/helper";
 
 const Context = createContext();
 
 export const DataContextProvider = ({ children }) => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const [count, setCount] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [maxPrice, setMaxPrice] = useState(1000000);
+  const [maxArea, setMaxArea] = useState(200);
 
   const fetchData = async () => {
     try {
@@ -16,10 +17,9 @@ export const DataContextProvider = ({ children }) => {
       const res = await axios.get(
         "https://forsa-staging.bit68.com/api/v1/stores/real_estate/"
       );
-      setCount(res.data.count);
       setData(res.data.results);
-      setPrev(res.data.previous);
-      setNext(res.data.next);
+      setMaxPrice(getMaxValue(res.data.results, "price"));
+      setMaxArea(getMaxValue(res.data.results, "area"));
     } catch (error) {
       // TODO: handle error with toast
       console.log("something went wrong");
@@ -31,12 +31,11 @@ export const DataContextProvider = ({ children }) => {
   return (
     <Context.Provider
       value={{
-        next,
-        prev,
         data,
-        count,
         fetchData,
         loading,
+        maxPrice,
+        maxArea,
       }}
     >
       {children}
