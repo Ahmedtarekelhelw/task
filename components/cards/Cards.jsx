@@ -35,7 +35,7 @@ const Cards = () => {
           )}
         </>
       ) : (
-        <p className="font-semibold text-xl text-center">
+        <p className="font-semibold text-xl text-center text-gray-400">
           There are no Results
         </p>
       )}

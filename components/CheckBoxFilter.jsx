@@ -1,68 +1,73 @@
 import { useRouter } from "next/router";
-import { CheckboxId, headers } from "../helper/helper";
-import { memo } from "react";
+import { CheckboxId, checkboxheaders } from "../helper/helper";
+import { memo, useState } from "react";
+import Button from "./Button";
 
 const CheckBoxFilter = ({ header, checkboxes }) => {
   const router = useRouter();
+  const [checked, setChecked] = useState("");
+
+  const navigation = (condition, box) => {
+    if (condition) {
+      router.push(
+        {
+          query: {
+            ...router.query,
+            [checkboxheaders[header]]: CheckboxId(box),
+          },
+        },
+        undefined,
+        { scroll: false }
+      );
+      return;
+    }
+    router.push(
+      {
+        query: {
+          ...router.query,
+          [checkboxheaders[header]]: "",
+        },
+      },
+      undefined,
+      { scroll: false }
+    );
+  };
+
+  const handleClick = (isActive, box) => {
+    navigation(!isActive, box);
+  };
+
+  const handleChange = (e, box) => {
+    setChecked(e.target.checked ? box : "");
+    navigation(e.target.checked, box);
+  };
 
   return (
     <div className="md:border-t-[1px] md:border-[#D5D5D5] flex flex-col mt-2">
       <span className="font-bold text-md my-3">{header}</span>
       <div className="flex gap-5 md:block overflow-x-auto scrollbar-hidden">
         {checkboxes?.map((box, i) => {
-          const isActive = router?.query[headers[header]] == CheckboxId(box);
+          const isActive =
+            router?.query[checkboxheaders[header]] == CheckboxId(box);
           return (
             <div className="flex items-center gap-3 mb-3 " key={i}>
-              <button
-                className={`block md:hidden py-2 px-4 w-[130px] text-sm sm:text-md cursor-pointer ${
-                  isActive ? "bg-[#0C1F39] text-white" : "bg-gray-200"
-                } rounded-lg transition-all capitalize`}
-                onClick={(e) => {
-                  !isActive
-                    ? router.push(
-                        {
-                          query: {
-                            ...router.query,
-                            [headers[header]]: CheckboxId(box),
-                          },
-                        },
-                        undefined,
-                        { scroll: false }
-                      )
-                    : router.push(
-                        {
-                          query: {
-                            ...router.query,
-                            [headers[header]]: "",
-                          },
-                        },
-                        undefined,
-                        { scroll: false }
-                      );
-                }}
-              >
-                {box}
-              </button>
+              <Button
+                text={box}
+                isActive={isActive}
+                handleClick={() => handleClick(isActive, box)}
+              />
 
               <div className="hidden md:flex gap-2">
                 <input
-                  type="radio"
+                  type="checkbox"
                   id={CheckboxId(box)}
                   name={header}
-                  checked={router?.query[headers[header]] == CheckboxId(box)}
+                  checked={
+                    router?.query[checkboxheaders[header]] ===
+                    CheckboxId(box || checked)
+                  }
                   className="accent-[#002554] cursor-pointer "
-                  onChange={(e) => {
-                    router.push(
-                      {
-                        query: {
-                          ...router.query,
-                          [headers[header]]: CheckboxId(box),
-                        },
-                      },
-                      undefined,
-                      { scroll: false }
-                    );
-                  }}
+                  onChange={(e) => handleChange(e, box)}
                 />
                 <label htmlFor={box} className="capitalize cursor-pointer">
                   {box}

@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import useSearchQuery from "../../hooks/useSearchQuery";
+import Button from "../Button";
 
 const sqmOptions = [
   "55 - 75",
@@ -34,15 +35,12 @@ const SqmFilter = () => {
           const formatSqm = item.split(" - ").join(",");
           const isActive = sqm === formatSqm;
           return (
-            <button
-              className={`py-2 px-4 w-[130px] outline-none  md:w-auto text-sm sm:text-md cursor-pointer ${
-                isActive ? "bg-[#0C1F39] text-white" : "bg-gray-200"
-              } rounded-xl transition-all`}
+            <Button
+              text={`${item} SQM`}
+              isActive={isActive}
               key={i}
-              onClick={() => handleClick(i, formatSqm)}
-            >
-              {item} SQM
-            </button>
+              handleClick={() => handleClick(i, formatSqm)}
+            />
           );
         })}
       </div>

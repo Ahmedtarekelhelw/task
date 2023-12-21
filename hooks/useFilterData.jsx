@@ -23,8 +23,11 @@ const useFilterData = (data, dataperpage) => {
             : obj.bedrooms_no === +bedrooms_no
           : true;
 
+        const isAny = furnished === "0";
         const furnishedFilter = furnished
-          ? obj.furnished.toString() == furnished
+          ? isAny
+            ? true
+            : obj.furnished.toString() == furnished
           : true;
 
         const priceFilter = price
