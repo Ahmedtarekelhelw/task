@@ -53,6 +53,7 @@ const CheckBoxFilter = ({ header, checkboxes }) => {
             <div className="flex items-center gap-3 mb-3 " key={i}>
               <Button
                 text={box}
+                style="md:hidden w-[130px]"
                 isActive={isActive}
                 handleClick={() => handleClick(isActive, box)}
               />
