@@ -1,10 +1,10 @@
-// Components
+import { useState } from "react";
 import Image from "next/image";
+
+// Components
 import Cards from "../components/cards/Cards";
 import Filteration from "../components/filteration/Filteration";
 import SqmFilter from "../components/sqmFilter/SqmFilter";
-import { useState } from "react";
-
 import MobileFilter from "../components/MobileFilter";
 
 export default function Home() {

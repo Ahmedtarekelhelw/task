@@ -10,7 +10,7 @@ const Card = ({ info }) => {
       <div className="imgContainer w-full h-[300px] aspect-square relative flex-1">
         <Image
           src={info.image}
-          fill
+          layout="fill"
           alt=""
           className="object-cover rounded-md"
         />

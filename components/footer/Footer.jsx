@@ -7,19 +7,19 @@ const Footer = () => {
       <div className="container pl-[50px] py-[50px] flex gap-16 sm:gap-[120px] flex-wrap md:justify-center justify-start items-start font-thin">
         <ul className="">
           <li className="flex flex-col gap-4">
-            <Link href="#">Navigate</Link>
-            <Link href="#">Home</Link>
-            <Link href="#">Properties</Link>
-            <Link href="#">Company</Link>
+            <Link href="/">Navigate</Link>
+            <Link href="/">Home</Link>
+            <Link href="/">Properties</Link>
+            <Link href="/">Company</Link>
           </li>
         </ul>
 
         <ul>
           <li className="flex flex-col gap-4">
-            <Link href="#">Support</Link>
-            <Link href="#">Terms and conditions</Link>
-            <Link href="#">FAQs</Link>
-            <Link href="#">Contact us</Link>
+            <Link href="/">Support</Link>
+            <Link href="/">Terms and conditions</Link>
+            <Link href="/">FAQs</Link>
+            <Link href="/">Contact us</Link>
           </li>
         </ul>
 

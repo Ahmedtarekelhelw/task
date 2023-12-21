@@ -1,6 +1,5 @@
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaAngleRight } from "react-icons/fa6";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import useSearchQuery from "../hooks/useSearchQuery";
 
@@ -10,9 +9,8 @@ const Pagination = ({ dataperpage }) => {
 
   const total = 10;
 
+  let pagesNum = [];
   let paginationNumber = total / dataperpage;
-
-  const pagesNum = [];
 
   for (let i = 1; i <= Math.ceil(paginationNumber); i++) {
     pagesNum.push(i);
@@ -28,18 +26,19 @@ const Pagination = ({ dataperpage }) => {
           }
         }}
       >
-        <FaAngleLeft color={currentPage <= 1 && "gray"} />
+        <FaAngleLeft color={currentPage <= 1 ? "gray" : "black"} />
       </button>
-      {pagesNum.map((page) => (
-        <Link
-          href={`?page=${page}`}
+
+      {pagesNum.map((page, i) => (
+        <button
           className={`${
             currentPage === page ? "font-bold" : ""
           } cursor-pointer`}
-          key={page}
+          key={i}
+          onClick={() => router.push(`?page=${page}`)}
         >
           {page}
-        </Link>
+        </button>
       ))}
       <button
         disabled={currentPage >= paginationNumber}
@@ -49,7 +48,9 @@ const Pagination = ({ dataperpage }) => {
           }
         }}
       >
-        <FaAngleRight color={currentPage >= paginationNumber && "gray"} />
+        <FaAngleRight
+          color={currentPage >= paginationNumber ? "gray" : "black"}
+        />
       </button>
     </div>
   );

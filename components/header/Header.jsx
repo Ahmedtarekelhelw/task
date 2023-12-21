@@ -5,7 +5,7 @@ const Header = () => {
     <header className="bg-white shadow-md p-5">
       <nav className="flex items-center gap-6 justify-end container">
         <div className="gap-5 hidden sm:flex">
-          <Image src="./assets/globe.svg" alt="globe" width={20} height={20} />
+          <Image src="/assets/globe.svg" alt="globe" width={20} height={20} />
           <button className="login ">Log in</button>
           <button className="sign-up font-bold ">Sign up</button>
         </div>
