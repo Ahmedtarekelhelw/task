@@ -5,7 +5,6 @@ import Filteration from "../components/filteration/Filteration";
 import SqmFilter from "../components/sqmFilter/SqmFilter";
 import { useState } from "react";
 
-import { useRouter } from "next/router";
 import MobileFilter from "../components/MobileFilter";
 
 export default function Home() {
