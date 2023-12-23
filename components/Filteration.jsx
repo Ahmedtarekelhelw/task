@@ -1,28 +1,42 @@
 import { useRouter } from "next/router";
-import { GoChevronLeft } from "react-icons/go";
 import CheckBoxFilter from "./CheckBoxFilter";
 import RangeFilter from "./RangeFilter";
 import { useData } from "../context/DataContext";
-import { useMemo } from "react";
 import useFilterOptions from "../hooks/useFilterOptions";
+import { GoChevronLeft } from "react-icons/go";
 
-const MobileFilter = ({ setOpenFilter, openFilter }) => {
+const Filteration = ({ setOpenFilter, openFilter, mobile }) => {
   const router = useRouter();
   const { maxPrice, maxArea } = useData();
 
   const { homeTypeFilter, bedRoomFilter, furnishedFilter } = useFilterOptions();
 
   return (
-    <>
+    <div
+      className={`${
+        !mobile && "border-[1px] w-full border-[#A4ABB6] rounded-md p-3"
+      } `}
+    >
       {/* header */}
-      <div className="bg-[#FCE9F0] flex justify-between items-center  p-5">
-        <div className="flex gap-3 items-center">
+      <div
+        className={`${
+          mobile && "bg-[#FCE9F0]  p-5"
+        } flex justify-between items-center flex-wrap gap-2`}
+      >
+        <div className="flex gap-2 items-center">
           <GoChevronLeft
             size={20}
+            className="block md:hidden"
             cursor="pointer"
             onClick={() => setOpenFilter(!openFilter)}
           />
-          <h3 className="text-md font-semibold">Filter by :</h3>
+          <h3
+            className={` ${
+              mobile && "font-semibold text-md"
+            } font-bold text-xl`}
+          >
+            Filter by :
+          </h3>
         </div>
 
         <button
@@ -32,20 +46,23 @@ const MobileFilter = ({ setOpenFilter, openFilter }) => {
           Clear all filter
         </button>
       </div>
-      {/* content */}
-      <div className="px-5">
+
+      {/* filteration content */}
+      <div className={`${mobile && "px-5"}`}>
         <CheckBoxFilter header="Type of home" checkboxes={homeTypeFilter} />
         <RangeFilter header="Price range" minVal={20} maxVal={maxPrice} />
+
         <CheckBoxFilter
           header="Number of bedrooms"
           checkboxes={bedRoomFilter}
         />
+
         <RangeFilter header="Area (sqm)" minVal={20} maxVal={maxArea} />
 
         <CheckBoxFilter header="Furnishings" checkboxes={furnishedFilter} />
       </div>
-    </>
+    </div>
   );
 };
 
-export default MobileFilter;
+export default Filteration;

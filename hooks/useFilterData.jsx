@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import useSearchQuery from "./useSearchQuery";
-import { useData } from "../context/DataContext";
 
 const useFilterData = (data, dataperpage) => {
   // url search params
@@ -47,10 +46,10 @@ const useFilterData = (data, dataperpage) => {
 
   let currentData = useMemo(
     () => {
-      if (sqm || home_type || bedrooms_no || furnished || price)
-        return FiltredData;
       let lastIndexofData = currentPage * dataperpage;
       let firstIndexofData = lastIndexofData - dataperpage;
+      if (sqm || home_type || bedrooms_no || furnished || price || currentPage)
+        return FiltredData?.slice(firstIndexofData, lastIndexofData);
       return data?.slice(firstIndexofData, lastIndexofData);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -64,7 +63,8 @@ const useFilterData = (data, dataperpage) => {
       FiltredData?.length,
     ]
   );
-  return currentData;
+
+  return { currentData, totalData: FiltredData?.length };
 };
 
 export default useFilterData;

@@ -14,6 +14,7 @@ const CheckBoxFilter = ({ header, checkboxes }) => {
           query: {
             ...router.query,
             [checkboxheaders[header]]: CheckboxId(box),
+            page: 1,
           },
         },
         undefined,

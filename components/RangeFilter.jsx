@@ -22,7 +22,11 @@ const RangeFilter = ({ header, minVal, maxVal }) => {
   const handleChange = (e, newValue) => {
     router.push(
       {
-        query: { ...router.query, [rangeHeaders[header]]: newValue.join(",") },
+        query: {
+          ...router.query,
+          [rangeHeaders[header]]: newValue.join(","),
+          page: 1,
+        },
       },
       undefined,
       { scroll: false } // to prevent scroll to top when change the area range

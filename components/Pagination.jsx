@@ -3,11 +3,11 @@ import { FaAngleRight } from "react-icons/fa6";
 import { useRouter } from "next/router";
 import useSearchQuery from "../hooks/useSearchQuery";
 
-const Pagination = ({ dataperpage }) => {
+const Pagination = ({ dataperpage, totalResult }) => {
   const router = useRouter();
   const { currentPage } = useSearchQuery();
 
-  const total = 10;
+  const total = totalResult;
 
   let pagesNum = [];
   let paginationNumber = total / dataperpage;
@@ -22,7 +22,7 @@ const Pagination = ({ dataperpage }) => {
         disabled={currentPage <= 1}
         onClick={() => {
           if (currentPage > 1) {
-            router.push(`?page=${currentPage - 1} `);
+            router.push({ query: { ...router.query, page: currentPage - 1 } });
           }
         }}
       >
@@ -35,7 +35,7 @@ const Pagination = ({ dataperpage }) => {
             currentPage === page ? "font-bold" : ""
           } cursor-pointer`}
           key={i}
-          onClick={() => router.push(`?page=${page}`)}
+          onClick={() => router.push({ query: { ...router.query, page } })}
         >
           {page}
         </button>
@@ -44,7 +44,7 @@ const Pagination = ({ dataperpage }) => {
         disabled={currentPage >= paginationNumber}
         onClick={() => {
           if (currentPage <= paginationNumber) {
-            router.push(`?page=${currentPage + 1} `);
+            router.push({ query: { ...router.query, page: currentPage + 1 } });
           }
         }}
       >
