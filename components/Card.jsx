@@ -11,16 +11,17 @@ const Card = ({ info }) => {
   const [addToFav, setAddToFav] = useState(false);
   return (
     <div className="relative cursor-pointer">
-      <div className="imgContainer w-full h-[300px] aspect-square relative flex-1">
+      <div className="imgContainer w-full h-[300px] aspect-square relative flex-1 select-none">
         <Image
           src={info.image}
           layout="fill"
           alt=""
+          draggable={false}
           className="object-cover rounded-md"
         />
         {addToFav ? (
           <FaHeart
-            className="absolute top-2 right-2 text-xl text-red-500"
+            className="absolute top-2 right-2 text-xl text-black"
             onClick={() => setAddToFav(!addToFav)}
           />
         ) : (
@@ -30,7 +31,7 @@ const Card = ({ info }) => {
           />
         )}
       </div>
-      <div className="card-info flex flex-col gap-2 bg-white rounded-xl shadow-md p-3 absolute bottom-[-10px] w-full">
+      <div className="card-info flex flex-col gap-2 bg-white rounded-xl shadow-md p-3  absolute bottom-[-10px] w-full">
         <span className="price font-bold">
           {info.price.toLocaleString()} EGP / mo
         </span>
