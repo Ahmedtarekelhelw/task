@@ -50,7 +50,7 @@ export default function Home({ data, MaxPrice, MaxArea }) {
         <div className="flex-1 hidden md:flex">
           <Filteration maxPrice={MaxPrice} maxArea={MaxArea} />
         </div>
-        <div className="flex-[3.5] relative">
+        <div className="flex-[3.5] relative mb-5 md:mb-0">
           <SqmFilter />
           <Cards data={data} />
         </div>
