@@ -1,12 +1,15 @@
 import { useState } from "react";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+import axios from "axios";
 
 // Components
-import Cards from "../components/Cards";
 import Filteration from "../components/Filteration";
 import SqmFilter from "../components/SqmFilter";
+import { getMaxValue } from "../helper/helper";
+const Cards = dynamic(() => import("../components/Cards"), { ssr: false });
 
-export default function Home() {
+export default function Home({ data, MaxPrice, MaxArea }) {
   const [openFilter, setOpenFilter] = useState(false);
 
   return (
@@ -31,6 +34,8 @@ export default function Home() {
           <Filteration
             setOpenFilter={setOpenFilter}
             openFilter={openFilter}
+            maxPrice={MaxPrice}
+            maxArea={MaxArea}
             mobile
           />
         )}
@@ -43,13 +48,31 @@ export default function Home() {
         } gap-8 justify-center `}
       >
         <div className="flex-1 hidden md:flex">
-          <Filteration />
+          <Filteration maxPrice={MaxPrice} maxArea={MaxArea} />
         </div>
         <div className="flex-[3.5] relative">
           <SqmFilter />
-          <Cards />
+          <Cards data={data} />
         </div>
       </div>
     </div>
   );
 }
+
+// if the data changed we can use revalidate key to ISR or using SSR
+export const getStaticProps = async () => {
+  const res = await axios.get(
+    "https://forsa-staging.bit68.com/api/v1/stores/real_estate/"
+  );
+  const MaxPrice = getMaxValue(res.data.results, "price");
+  const MaxArea = getMaxValue(res.data.results, "area");
+
+  return {
+    props: {
+      data: res.data.results,
+      MaxPrice,
+      MaxArea,
+    },
+    // revalidate: 10,
+  };
+};

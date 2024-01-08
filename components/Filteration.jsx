@@ -1,14 +1,17 @@
 import { useRouter } from "next/router";
 import CheckBoxFilter from "./CheckBoxFilter";
 import RangeFilter from "./RangeFilter";
-import { useData } from "../context/DataContext";
 import useFilterOptions from "../hooks/useFilterOptions";
 import { GoChevronLeft } from "react-icons/go";
 
-const Filteration = ({ setOpenFilter, openFilter, mobile }) => {
+const Filteration = ({
+  setOpenFilter,
+  openFilter,
+  mobile,
+  maxPrice,
+  maxArea,
+}) => {
   const router = useRouter();
-  const { maxPrice, maxArea } = useData();
-
   const { homeTypeFilter, bedRoomFilter, furnishedFilter } = useFilterOptions();
 
   return (

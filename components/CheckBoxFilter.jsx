@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { CheckboxId, checkboxheaders } from "../helper/helper";
-import { memo, useState } from "react";
+import {  useState } from "react";
 import Button from "./Button";
 
 const CheckBoxFilter = ({ header, checkboxes }) => {
@@ -83,4 +83,4 @@ const CheckBoxFilter = ({ header, checkboxes }) => {
   );
 };
 
-export default memo(CheckBoxFilter);
+export default CheckBoxFilter;
